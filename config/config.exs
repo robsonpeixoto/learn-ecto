@@ -5,3 +5,5 @@ config :friends, Friends.Repo,
   username: "pguser",
   password: "pgpass",
   hostname: "localhost"
+
+config :friends, ecto_repos: [Friends.Repo]
