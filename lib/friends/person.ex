@@ -12,4 +12,11 @@ defmodule Friends.Person do
     |> Ecto.Changeset.cast(params, [:first_name, :last_name, :age])
     |> Ecto.Changeset.validate_required([:first_name, :last_name])
   end
+
+  def insert_person(name) do
+    params = %{first_name: name, last_name: "bililiu", age: 0}
+    %__MODULE__{}
+    |> __MODULE__.changeset(params)
+    |> Friends.Repo.insert()
+  end
 end

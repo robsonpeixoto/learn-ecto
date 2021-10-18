@@ -18,4 +18,15 @@ defmodule Friends.Playground do
 
     Friends.Repo.one(query)
   end
+
+  def fail_multi do
+    Ecto.Multi.new()
+    |> Ecto.Multi.run(:totonho, fn _, _ ->
+      Friends.Person.insert_person("totonho")
+    end)
+    |> Ecto.Multi.run(:tofail, fn _, %{totonho: %{id: id}} ->
+      {:error, id}
+    end)
+    |> Friends.Repo.transaction()
+  end
 end
